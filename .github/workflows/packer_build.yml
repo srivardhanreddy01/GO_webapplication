@@ -44,6 +44,21 @@ jobs:
           ls -ltr
           go test ./...
 
+
+      - name: Building the artifacts
+        run: zip -r webapplication_go.zip ./
+
+      - name: Install Packer
+        run: |
+          curl -fsSL https://releases.hashicorp.com/packer/1.7.0/packer_1.7.0_linux_amd64.zip -o packer.zip
+          unzip packer.zip
+          sudo mv packer /usr/local/bin/
+          packer --version
+        if: success()
+
+      - name: List Files
+        run: ls
+
       - name: Initialize Packer
         run: packer init aws-debian.pkr.hcl
 
