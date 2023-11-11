@@ -74,7 +74,7 @@ build {
   provisioner "shell" {
     inline = [
       "ls -ltr",
-      "cd webapplication_go",
+      "cd /home/admin",
       "chmod +x /home/admin/webapplication_go/setup.sh",
       "/home/admin/webapplication_go/setup.sh"
 
