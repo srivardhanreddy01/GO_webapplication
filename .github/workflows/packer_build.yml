@@ -41,6 +41,7 @@ jobs:
 
       - name: Run Integration tests
         run: |
+          ls -ltr
           go test ./...
 
       - name: Initialize Packer
