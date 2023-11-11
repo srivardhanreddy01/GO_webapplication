@@ -78,6 +78,7 @@ build {
       "chmod +x /home/admin/setup.sh",
       "/home/admin/setup.sh"
 
+
     ]
   }
 
