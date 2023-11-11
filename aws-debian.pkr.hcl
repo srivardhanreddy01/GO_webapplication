@@ -75,8 +75,8 @@ build {
     inline = [
       "ls -ltr",
       "cd /home/admin",
-      "chmod +x /home/admin/webapplication_go/setup.sh",
-      "/home/admin/webapplication_go/setup.sh"
+      "chmod +x /home/admin/setup.sh",
+      "/home/admin/setup.sh"
 
     ]
   }
