@@ -19,6 +19,7 @@ func isDatabaseHealthy() (bool, error) {
 	// Construct DSN using environment variables
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUserName, dbPassword, dbHost, dbPort, dbName)
 
+
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return false, err

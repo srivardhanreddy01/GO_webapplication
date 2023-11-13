@@ -22,6 +22,7 @@ func InitDB() *gorm.DB {
 	// Construct DSN using environment variables
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUserName, dbPassword, dbHost, dbPort, dbName)
 
+
 	var err error
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

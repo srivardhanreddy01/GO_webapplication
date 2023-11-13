@@ -1,7 +1,7 @@
 name: CI/CD test
 
 on:
-  push:
+  push
     branches:
       - main
 
@@ -17,6 +17,7 @@ jobs:
           MYSQL_USER: ${{ secrets.DB_USER }}
           MYSQL_PORT: ${{ secrets.DB_PORT }}
           MYSQL_HOST: ${{ secrets.DB_HOST }}
+
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
