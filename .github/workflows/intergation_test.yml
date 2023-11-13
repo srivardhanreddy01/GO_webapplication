@@ -12,8 +12,11 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: DBpassword
-          MYSQL_DATABASE: 'godatabase'
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
+          MYSQL_USER: ${{ secrets.DB_USER }}
+          MYSQL_PORT: ${{ secrets.DB_PORT }}
+          MYSQL_HOST: ${{ secrets.DB_HOST }}
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -28,7 +31,7 @@ jobs:
 
       - name: Wait for MySQL to be ready
         run: |
-          until nc -z -v -w30 localhost 3306
+          until nc -z -v -w30 ${{ secrets.DB_HOST }} ${{ secrets.DB_PORT }}
           do
             echo "Waiting for MySQL to be ready..."
             sleep 5
@@ -41,5 +44,9 @@ jobs:
 
       - name: Run Integration tests
         run: |
+          DB_HOST=${{ secrets.DB_HOST }} 
+          DB_PORT=${{ secrets.DB_PORT }} 
+          DB_USER=${{ secrets.DB_USER }} 
+          DB_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} 
+          DB_NAME=${{ secrets.DB_DATABASE }} 
           go test ./...
-
