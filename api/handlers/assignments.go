@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"strconv"
 
 	"net/http"
@@ -80,7 +79,7 @@ func CreateAssignment(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 func GetAssignment(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	fmt.Println(id)
+	// fmt.Println(id)
 	assignmentID, err := strconv.Atoi(id)
 	if err != nil {
 		sendJSONResponse(w, "Invalid assignment ID", http.StatusBadRequest)

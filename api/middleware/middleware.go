@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -18,15 +17,15 @@ func BasicAuthMiddleware(deps AuthMiddlewareDependencies, next http.Handler) htt
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		email, password, ok := r.BasicAuth()
-		fmt.Println(email)
-		fmt.Println(password)
+		// fmt.Println(email)
+		// fmt.Println(password)
 		if !ok {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 
-		fmt.Println(email)
-		fmt.Println(password)
+		// fmt.Println(email)
+		// fmt.Println(password)
 
 		// Authenticate the user based on the provided username and password
 		user, err := handlers.AuthenticateUser(deps.AuthHandlerDependencies, email, password)

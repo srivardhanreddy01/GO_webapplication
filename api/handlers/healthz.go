@@ -9,7 +9,7 @@ import (
 )
 
 func isDatabaseHealthy() (bool, error) {
-	dsn := "root:Sripragna$1@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
+	dsn := "root:DBpassword@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

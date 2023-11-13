@@ -11,7 +11,7 @@ import (
 var db *gorm.DB
 
 func InitDB() *gorm.DB {
-	dsn := "root:Sripragna$1@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
+	dsn := "root:DBpassword@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
 
 	var err error
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
