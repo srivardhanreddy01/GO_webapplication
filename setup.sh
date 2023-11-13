@@ -4,7 +4,7 @@ echo "Script started"
 
 # Update and install packages with sudo
 sudo apt update
-sudo apt --assume-yes install mariadb-client mariadb-server -y
+# sudo apt --assume-yes install mariadb-client mariadb-server -y
 
 # Download the stable version of Go
 wget https://golang.org/dl/go1.21.2.linux-amd64.tar.gz
