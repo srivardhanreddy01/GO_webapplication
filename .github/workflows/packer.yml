@@ -36,3 +36,9 @@ jobs:
 
     - name: Validate Packer Template
       run: packer validate aws-debian.pkr.hcl
+
+    - name: Print Environment Variables
+      run: |
+        echo "${{ secrets.AWS_ACCESS_KEY_ID }}"
+
+

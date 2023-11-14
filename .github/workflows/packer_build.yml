@@ -12,11 +12,13 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: Sripragna$1
-          MYSQL_DATABASE: 'godatabase'
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
+          MYSQL_USER: ${{ secrets.DB_USER }}
+          MYSQL_PORT: ${{ secrets.DB_PORT }}
+          MYSQL_HOST: ${{ secrets.DB_HOST }}
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -28,7 +30,7 @@ jobs:
 
       - name: Wait for MySQL to be ready
         run: |
-          until nc -z -v -w30 localhost 3306
+          until nc -z -v -w30 ${{ secrets.DB_HOST }} ${{ secrets.DB_PORT }}
           do
             echo "Waiting for MySQL to be ready..."
             sleep 5
@@ -41,7 +43,22 @@ jobs:
 
       - name: Run Integration tests
         run: |
-          go test ./...
+          ls -ltr
+          DB_HOST=${{ secrets.DB_HOST }} DB_PORT=${{ secrets.DB_PORT }} DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} DB_NAME=${{ secrets.DB_DATABASE }} go test ./...
+
+      - name: Building the artifacts
+        run: zip -r webapplication_go.zip ./
+
+      - name: Install Packer
+        run: |
+          curl -fsSL https://releases.hashicorp.com/packer/1.7.0/packer_1.7.0_linux_amd64.zip -o packer.zip
+          unzip packer.zip
+          sudo mv packer /usr/local/bin/
+          packer --version
+        if: success()
+
+      - name: List Files
+        run: ls
 
       - name: Initialize Packer
         run: packer init aws-debian.pkr.hcl
