@@ -15,7 +15,7 @@ import (
 
 func main() {
 	db := api.InitDB()
-	csvFile, err := os.Open("/home/admin/opt/user.csv")
+	csvFile, err := os.Open("opt/user.csv")
 	if err != nil {
 		log.Fatal(err)
 	}

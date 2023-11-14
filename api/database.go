@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/srivardhanreddy01/webapplication_go/api/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -13,17 +14,40 @@ var db *gorm.DB
 
 func InitDB() *gorm.DB {
 	// Read environment variables
+	// dbHost := os.Getenv("DB_HOST")
+	// dbUserName := os.Getenv("DB_HOST_NAME")
+	// dbPassword := os.Getenv("DB_PASSWORD")
+	// dbPort := os.Getenv("DB_PORT")
+	// dbName := os.Getenv("DB_NAME")
+
+	// Construct DSN using environment variables
+	//dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUserName, dbPassword, dbHost, dbPort, dbName)
+	// dbHost := os.Getenv("DB_HOST")
+	// dbUserName := os.Getenv("DB_HOST_NAME")
+	// dbPassword := os.Getenv("DB_PASSWORD")
+	// dbPort := os.Getenv("DB_PORT")
+	// dbName := os.Getenv("DB_NAME")
+
+	// Construct DSN using environment variables
+
+	// Display the original and escaped password
+	err1 := godotenv.Load()
+	if err1 != nil {
+		fmt.Println("Error loading .env file")
+	}
+
 	dbHost := os.Getenv("DB_HOST")
 	dbUserName := os.Getenv("DB_HOST_NAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbPort := os.Getenv("DB_PORT")
 	dbName := os.Getenv("DB_NAME")
 
-	// Construct DSN using environment variables
+	//dsn := "root:Sripragna$1@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
+
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUserName, dbPassword, dbHost, dbPort, dbName)
 
-
 	var err error
+
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println(err.Error())

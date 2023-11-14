@@ -7,9 +7,15 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 func isDatabaseHealthy() (bool, error) {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
 	dbHost := os.Getenv("DB_HOST")
 	dbUserName := os.Getenv("DB_HOST_NAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
@@ -17,8 +23,13 @@ func isDatabaseHealthy() (bool, error) {
 	dbName := os.Getenv("DB_NAME")
 
 	// Construct DSN using environment variables
+
+	// Display the original and escaped passwords
+	fmt.Println("Original Password:", dbPassword)
+
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUserName, dbPassword, dbHost, dbPort, dbName)
 
+	//dsn := "root:Sripragna$1@tcp(127.0.0.1:3306)/godatabase?parseTime=true"
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
