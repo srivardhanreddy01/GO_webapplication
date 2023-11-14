@@ -39,8 +39,9 @@ jobs:
 
     - name: Print Environment Variables
       run: |
-        echo "DB_HOST=${{ secrets.DB_HOST }}"
-        echo "DB_PORT=${{ secrets.DB_PORT }}"
-        echo "DB_USER=${{ secrets.DB_USER }}"
-        echo "DB_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}"
-        echo "DB_NAME=${{ secrets.DB_DATABASE }}"
+        echo "${{ secrets.DB_HOST }}"
+        echo "${{ secrets.DB_PORT }}"
+        echo "{{ secrets.DB_USER }}"
+        echo "${{ secrets.DB_ROOT_PASSWORD }}"
+        echo "${{ secrets.DB_DATABASE }}"
+
