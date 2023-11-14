@@ -39,11 +39,6 @@ jobs:
 
     - name: Print Environment Variables
       run: |
-        echo "${{ secrets.DB_HOST }}"
-        echo "${{ secrets.DB_PORT }}"
-        echo "${{ secrets.DB_USER }}" 
-        echo "${{ secrets.DB_ROOT_PASSWORD }}"
-        echo "${{ secrets.DB_DATABASE }}"
         echo "${{ secrets.AWS_ACCESS_KEY_ID }}"
 
 
