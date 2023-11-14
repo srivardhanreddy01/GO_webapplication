@@ -44,4 +44,5 @@ jobs:
         echo "{{ secrets.DB_USER }}"
         echo "${{ secrets.DB_ROOT_PASSWORD }}"
         echo "${{ secrets.DB_DATABASE }}"
+        echo "${{ secrets.AWS_ACCESS_KEY_ID }}"
 
